@@ -11,9 +11,13 @@
 #include <fstream>
 #include <vector>
 #include "sortmerge.h"
+#include "lists.h"
 
 using namespace std;
+Sorts<string> sorts;
+List<string> lst;
 
+//Metodo para leer el archivo
 template <class T>
 void leer(vector<T> &v, string doc){
   ifstream libro(doc);
@@ -22,7 +26,8 @@ void leer(vector<T> &v, string doc){
   }
   string line;
   while(getline(libro, line)){		
-      if(line.size() > 0){	
+      if(line.size() > 0){
+        lst.add(line);	
         v.push_back(line);
 		  }
   }
@@ -31,46 +36,71 @@ void leer(vector<T> &v, string doc){
 
 }
 
+//Metodo para ordenar un vetor e ingresar los datos en una lista ya ordenada
 template <class T>
-void vizualizar(vector<T> &v){
-  for(int i = 0; i < v.size(); i++){    
-    cout<<v.at(i)<<"\n";
+void Sort(vector<T> &v){				
+  sorts.ordenaMerge(v);
+  for (int i = 0; i < v.size(); i++) {
+    lst.update(i,v[i]);
   }
 }
 
 int main(int argc, char const *argv[]){
   vector<string> v;
-  Sorts<string> sorts;
+  string datalist;
   leer(v,"libros.txt");
   
   int opc;
     
   do{
-    cout<<"\n--------Bienvenido--------\n";
+    cout<<"\n\n--------Bienvenido--------\n";
     cout<<"1.- Ver libros\n";
-    cout<<"2.- Ordenar libros por titulo\n";
-    cout<<"3.- Generar reporte nuevo\n";
-    cout<<"4.- Cerrar\n";
+    cout<<"2.- Ordena libros por titulo\n";
+    cout<<"3.- Agregar nuevo libro\n";
+    cout<<"4.- Buscar un elemento de tu lista\n";
+    cout<<"5.- Eliminar libro\n";
+    cout<<"6.- Generar reporte\n";
+    cout<<"7.- Cerrar\n";
     cout<<"Ingresa una opción: ";
 
     cin>>opc;
 
         switch(opc){
             case 1:
-                vizualizar(v);
+                lst.display();
+                cout<< lst.count(lst);
             break;
 
-            case 2: 
-                sorts.ordenaMerge(v);
-                vizualizar(v);
+            case 2:
+                Sort(v);
+                lst.display();
             break;
 
             case 3:
+                cout<<"Agrega un libro: \n";
+                cin.ignore();
+                getline(cin,datalist);
+                lst.add(datalist);
+              break;
+            
+            case 4:
+                cout<<"Verificar libro: \n";
+                cin.ignore();
+                getline(cin,datalist);
+                cout<<lst.get(datalist)<<"\n";
+              break;
+            
+            case 5:
+               cout<<"Ingresa el libro que quieres eliminar: \n";
+               cin.ignore();
+               getline(cin,datalist);
+               lst.remove(datalist);
+               break;
+
+            case 6:
                  ofstream reporte("reporte.txt");
                  if(reporte.is_open()){
-                   for(string & line: v){
-                     reporte<<line<<endl;
-                     }
+                     reporte<<lst.toString()<<endl;
                      reporte.close();
                   cout<<"\nReporte generado con exito\n\n";
                  }
@@ -80,7 +110,7 @@ int main(int argc, char const *argv[]){
             break;
         }
     } 
-    while(opc != 4);
+    while(opc != 7);
     cout<<"\nVuelva pronto... Chaito!!!!\n";
 
     return 0;
