@@ -11,7 +11,6 @@ template < class T >
 class Sorts {
   //Funciones de apoyo
   private:
-    void swap(vector<T>&, int, int); 
     void copyArray(vector<T>& , vector<T>& , int , int );
     void mergeArray(vector<T>& A, vector<T>& B, int i, int j, int k);
     void mergeSplit(vector<T>& , vector<T>& , int , int );    
@@ -19,14 +18,6 @@ class Sorts {
   public:
     vector<T> ordenaMerge(vector<T>&);
 };
-
-//Funcion swap: cambia de posición dos elementos del vector
-template <class T>
-void Sorts<T>::swap(vector<T> &v, int i, int j) {
-	int aux = v[i];
-	v[i] = v[j];
-	v[j] = aux;
-}
 
 //Se usa como mascara para la funcion mergeSplit 
 template <class T>
