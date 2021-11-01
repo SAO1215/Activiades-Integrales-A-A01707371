@@ -48,6 +48,8 @@ public:
     T get(T);
     void remove(T);
     void display();
+    void clear();
+    vector<T> list_to_vect(List<T>&);
 
 private:
     Link<T> *head;
@@ -69,6 +71,21 @@ List<T>::~List() {
     }
     head = 0;
     size = 0;
+}
+
+//Limpia toda la lista
+template <class T>
+void List<T>::clear() {
+	Link<T> *p, *q;
+
+	p = head;
+	while (p != 0) {
+		q = p->next;
+		delete p;
+		p = q;
+	}
+	head = 0;
+	size = 0;
 }
 
 //Metodo count(): Obtiene el numero de nodos de la lista
@@ -169,6 +186,23 @@ void List<T>::display(){
         cout<<p->value<<"\n";
         p = p->next;
     }
+}
+
+template <class T>
+vector<T> List<T>::list_to_vect(List<T> &lst){
+    Link<T> *p;  
+    vector<T> v;    
+    p = head; 
+    int i = 0;
+              
+    while(p != NULL){ 
+        v.push_back(p->value);
+        p = p->next;
+    }
+    /*for (i = 0; i < v.size(); ++i) {
+        cout << v.at(i) << "; ";
+    }*/
+    return v;
 }
 
 //Metodo toString(): Muestra la lista

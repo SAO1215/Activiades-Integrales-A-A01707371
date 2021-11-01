@@ -53,8 +53,33 @@ Selecciona y usa una estructura lineal adecuada al problema dentro de tu program
 **Estructura lineal**
 Se hace uso del archivo "list.h" donde se encuentra una estructura para crear listas y varios metodos para manejarlas, y su implementación se encuentara dentro de "main.cpp".
 
+## Integral A Avance 3
+### Competencias a evaluar
+### SICT0302B: Toma decisiones
+
+Usa un árbol adecuado para resolver un problema, puede ser cualquiera de los árboles vistos en el curso, lo lo importante es que se demuestre que se usa forma útil el árbol para extraer y guardar información.
+
+**Estructura arbol**
+Se cambio el programa para que por medio de la estructura de arbol binario que se encuentra en el archivo "bst.h" para su implementacion, ahora podemos almacenar, agregar, eliminar, consultar y mostrar nuestros datos ordenados.
+
+### SICT0302B: Toma decisiones
+
+Hace un análisis de complejidad correcto y completo para todo el programa y sus compenetes. 
+
+**Análisis de complejidad temporal**
+
+*add()*: Esta funcion añade un elemento en el arbol, no necesita recorrer todo el arbol sino que divide este proceso por niveles. su complejidad es de O(log(n)).
+
+*remove()*: Esta funcion elimina un elemento de la estructura, para esto no recorre uno a uno sino que se va dividiendo el trabajo por lo que su complejidad es de O(log(n)).
+
+*removeAll()*: Esta funcion vacia todo el arbol, se apoya de otra funcion llamada *removeChild()* que elimina los nodos hijos, su complejidad es O(log(n)).
+
+*visit()*: Esta función nos ayuda a darle el formato deseado a la funcion *inorder()* la cual nos muestra el contenido de los datos en orden, su complejidad es de O(log(n)).
+
+*find()*: Con esta funcion verificarmos que un dato se encuentre en la estructura, su complejidad es de O(log(n)).
+
 ## Consideraciones
-- Solo es capaz de ordenar parcialmete los datos, ya que solo puede ordenar los ya existentes en el documento "libros.txt", los agregados posteriormente se colocan el final de la lista.
+- Para el avance 3, todo lo que se estaba implementado con listas y sorts se cambio a arboles.
 - Para eliminar o agregar datos es necesario escribir todos los datos respetando los espacios. Ejemplo: "Un_mundo_feliz Aldous_Huxley 374" 
 
 
